@@ -1,0 +1,3 @@
+/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/matlang.dir
