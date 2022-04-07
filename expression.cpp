@@ -8,7 +8,7 @@ size_t Expression::GetSize() const {
     return args_.size();
 }
 
-std::list<sptrObj> &Expression::GetArgs() const {
+std::list<sptrObj> &Expression::GetArgs() {
     return args_;
 }
 

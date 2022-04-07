@@ -1,13 +1,13 @@
 #pragma once
-
-#ifndef MATLANG_EXPRESSION_H
-#define MATLANG_EXPRESSION_H
-
 #include <stack>
 
 #include "object.h"
 #include "matrix.h"
 #include "integer.h"
+
+#ifndef MATLANG_EXPRESSION_H
+#define MATLANG_EXPRESSION_H
+
 
 class Expression : public Object {
 private:
@@ -24,7 +24,7 @@ public:
 
     size_t GetSize() const;
 
-    std::list<sptrObj> &GetArgs() const;
+    std::list<sptrObj> &GetArgs();
 
     std::string GetString() override;
 
@@ -70,7 +70,7 @@ public:
                     s.pop();
                 }
                 s.push(arg);
-            } else if (Is<Symbol>(arg) || Is<Integer>(arg)) {
+            } else if (Is<Symbol>(arg) || Is<Evaluable>(arg)) {
                 postfix.push_back(arg);
             }
         }

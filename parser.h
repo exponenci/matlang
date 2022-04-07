@@ -1,15 +1,15 @@
 #pragma once
+#include <memory>
+
+#include "tokenizer.h"
+#include "object.h"
+#include "matrix.h"
+#include "expression.h"
+#include "integer.h"
 
 #ifndef MATLANG_PARSER_H
 #define MATLANG_PARSER_H
 
-#include <memory>
-
-#include "tokenizer.h"
-#include "types/object.h"
-#include "types/matrix.h"
-#include "types/expression.h"
-#include "types/integer.h"
 
 std::list<std::shared_ptr<Object>> ReadScript(Tokenizer *);
 

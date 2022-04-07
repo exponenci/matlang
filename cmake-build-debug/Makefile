@@ -123,6 +123,33 @@ matlang/fast:
 	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/build
 .PHONY : matlang/fast
 
+comm.o: comm.cpp.o
+
+.PHONY : comm.o
+
+# target to build an object file
+comm.cpp.o:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/comm.cpp.o
+.PHONY : comm.cpp.o
+
+comm.i: comm.cpp.i
+
+.PHONY : comm.i
+
+# target to preprocess a source file
+comm.cpp.i:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/comm.cpp.i
+.PHONY : comm.cpp.i
+
+comm.s: comm.cpp.s
+
+.PHONY : comm.s
+
+# target to generate assembly for a file
+comm.cpp.s:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/comm.cpp.s
+.PHONY : comm.cpp.s
+
 dispatcher.o: dispatcher.cpp.o
 
 .PHONY : dispatcher.o
@@ -149,6 +176,60 @@ dispatcher.s: dispatcher.cpp.s
 dispatcher.cpp.s:
 	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/dispatcher.cpp.s
 .PHONY : dispatcher.cpp.s
+
+expression.o: expression.cpp.o
+
+.PHONY : expression.o
+
+# target to build an object file
+expression.cpp.o:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/expression.cpp.o
+.PHONY : expression.cpp.o
+
+expression.i: expression.cpp.i
+
+.PHONY : expression.i
+
+# target to preprocess a source file
+expression.cpp.i:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/expression.cpp.i
+.PHONY : expression.cpp.i
+
+expression.s: expression.cpp.s
+
+.PHONY : expression.s
+
+# target to generate assembly for a file
+expression.cpp.s:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/expression.cpp.s
+.PHONY : expression.cpp.s
+
+integer.o: integer.cpp.o
+
+.PHONY : integer.o
+
+# target to build an object file
+integer.cpp.o:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/integer.cpp.o
+.PHONY : integer.cpp.o
+
+integer.i: integer.cpp.i
+
+.PHONY : integer.i
+
+# target to preprocess a source file
+integer.cpp.i:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/integer.cpp.i
+.PHONY : integer.cpp.i
+
+integer.s: integer.cpp.s
+
+.PHONY : integer.s
+
+# target to generate assembly for a file
+integer.cpp.s:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/integer.cpp.s
+.PHONY : integer.cpp.s
 
 interpreter.o: interpreter.cpp.o
 
@@ -204,6 +285,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+matrix.o: matrix.cpp.o
+
+.PHONY : matrix.o
+
+# target to build an object file
+matrix.cpp.o:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/matrix.cpp.o
+.PHONY : matrix.cpp.o
+
+matrix.i: matrix.cpp.i
+
+.PHONY : matrix.i
+
+# target to preprocess a source file
+matrix.cpp.i:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/matrix.cpp.i
+.PHONY : matrix.cpp.i
+
+matrix.s: matrix.cpp.s
+
+.PHONY : matrix.s
+
+# target to generate assembly for a file
+matrix.cpp.s:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/matrix.cpp.s
+.PHONY : matrix.cpp.s
+
 parser.o: parser.cpp.o
 
 .PHONY : parser.o
@@ -258,168 +366,6 @@ tokenizer.cpp.s:
 	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/tokenizer.cpp.s
 .PHONY : tokenizer.cpp.s
 
-types/expression.o: types/expression.cpp.o
-
-.PHONY : types/expression.o
-
-# target to build an object file
-types/expression.cpp.o:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/expression.cpp.o
-.PHONY : types/expression.cpp.o
-
-types/expression.i: types/expression.cpp.i
-
-.PHONY : types/expression.i
-
-# target to preprocess a source file
-types/expression.cpp.i:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/expression.cpp.i
-.PHONY : types/expression.cpp.i
-
-types/expression.s: types/expression.cpp.s
-
-.PHONY : types/expression.s
-
-# target to generate assembly for a file
-types/expression.cpp.s:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/expression.cpp.s
-.PHONY : types/expression.cpp.s
-
-types/integer.o: types/integer.cpp.o
-
-.PHONY : types/integer.o
-
-# target to build an object file
-types/integer.cpp.o:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/integer.cpp.o
-.PHONY : types/integer.cpp.o
-
-types/integer.i: types/integer.cpp.i
-
-.PHONY : types/integer.i
-
-# target to preprocess a source file
-types/integer.cpp.i:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/integer.cpp.i
-.PHONY : types/integer.cpp.i
-
-types/integer.s: types/integer.cpp.s
-
-.PHONY : types/integer.s
-
-# target to generate assembly for a file
-types/integer.cpp.s:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/integer.cpp.s
-.PHONY : types/integer.cpp.s
-
-types/matrix.o: types/matrix.cpp.o
-
-.PHONY : types/matrix.o
-
-# target to build an object file
-types/matrix.cpp.o:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/matrix.cpp.o
-.PHONY : types/matrix.cpp.o
-
-types/matrix.i: types/matrix.cpp.i
-
-.PHONY : types/matrix.i
-
-# target to preprocess a source file
-types/matrix.cpp.i:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/matrix.cpp.i
-.PHONY : types/matrix.cpp.i
-
-types/matrix.s: types/matrix.cpp.s
-
-.PHONY : types/matrix.s
-
-# target to generate assembly for a file
-types/matrix.cpp.s:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/matrix.cpp.s
-.PHONY : types/matrix.cpp.s
-
-types/mcomplex.o: types/mcomplex.cpp.o
-
-.PHONY : types/mcomplex.o
-
-# target to build an object file
-types/mcomplex.cpp.o:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/mcomplex.cpp.o
-.PHONY : types/mcomplex.cpp.o
-
-types/mcomplex.i: types/mcomplex.cpp.i
-
-.PHONY : types/mcomplex.i
-
-# target to preprocess a source file
-types/mcomplex.cpp.i:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/mcomplex.cpp.i
-.PHONY : types/mcomplex.cpp.i
-
-types/mcomplex.s: types/mcomplex.cpp.s
-
-.PHONY : types/mcomplex.s
-
-# target to generate assembly for a file
-types/mcomplex.cpp.s:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/mcomplex.cpp.s
-.PHONY : types/mcomplex.cpp.s
-
-types/polynomial.o: types/polynomial.cpp.o
-
-.PHONY : types/polynomial.o
-
-# target to build an object file
-types/polynomial.cpp.o:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/polynomial.cpp.o
-.PHONY : types/polynomial.cpp.o
-
-types/polynomial.i: types/polynomial.cpp.i
-
-.PHONY : types/polynomial.i
-
-# target to preprocess a source file
-types/polynomial.cpp.i:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/polynomial.cpp.i
-.PHONY : types/polynomial.cpp.i
-
-types/polynomial.s: types/polynomial.cpp.s
-
-.PHONY : types/polynomial.s
-
-# target to generate assembly for a file
-types/polynomial.cpp.s:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/polynomial.cpp.s
-.PHONY : types/polynomial.cpp.s
-
-types/rational.o: types/rational.cpp.o
-
-.PHONY : types/rational.o
-
-# target to build an object file
-types/rational.cpp.o:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/rational.cpp.o
-.PHONY : types/rational.cpp.o
-
-types/rational.i: types/rational.cpp.i
-
-.PHONY : types/rational.i
-
-# target to preprocess a source file
-types/rational.cpp.i:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/rational.cpp.i
-.PHONY : types/rational.cpp.i
-
-types/rational.s: types/rational.cpp.s
-
-.PHONY : types/rational.s
-
-# target to generate assembly for a file
-types/rational.cpp.s:
-	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/types/rational.cpp.s
-.PHONY : types/rational.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -429,39 +375,33 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... matlang"
+	@echo "... comm.o"
+	@echo "... comm.i"
+	@echo "... comm.s"
 	@echo "... dispatcher.o"
 	@echo "... dispatcher.i"
 	@echo "... dispatcher.s"
+	@echo "... expression.o"
+	@echo "... expression.i"
+	@echo "... expression.s"
+	@echo "... integer.o"
+	@echo "... integer.i"
+	@echo "... integer.s"
 	@echo "... interpreter.o"
 	@echo "... interpreter.i"
 	@echo "... interpreter.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... matrix.o"
+	@echo "... matrix.i"
+	@echo "... matrix.s"
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"
 	@echo "... tokenizer.o"
 	@echo "... tokenizer.i"
 	@echo "... tokenizer.s"
-	@echo "... types/expression.o"
-	@echo "... types/expression.i"
-	@echo "... types/expression.s"
-	@echo "... types/integer.o"
-	@echo "... types/integer.i"
-	@echo "... types/integer.s"
-	@echo "... types/matrix.o"
-	@echo "... types/matrix.i"
-	@echo "... types/matrix.s"
-	@echo "... types/mcomplex.o"
-	@echo "... types/mcomplex.i"
-	@echo "... types/mcomplex.s"
-	@echo "... types/polynomial.o"
-	@echo "... types/polynomial.i"
-	@echo "... types/polynomial.s"
-	@echo "... types/rational.o"
-	@echo "... types/rational.i"
-	@echo "... types/rational.s"
 .PHONY : help
 
 

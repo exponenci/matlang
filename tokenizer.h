@@ -1,11 +1,11 @@
 #pragma once
 
-#ifndef MATLANG_TOKENIZER_H
-#define MATLANG_TOKENIZER_H
-
 #include <variant>
 #include <optional>
 #include <istream>
+
+#ifndef MATLANG_TOKENIZER_H
+#define MATLANG_TOKENIZER_H
 
 
 enum class BracketToken { OPEN, CLOSE }; // []

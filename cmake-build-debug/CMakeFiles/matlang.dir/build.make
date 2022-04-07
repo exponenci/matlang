@@ -57,100 +57,9 @@ include CMakeFiles/matlang.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/matlang.dir/flags.make
 
-CMakeFiles/matlang.dir/types/expression.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/types/expression.cpp.o: ../types/expression.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/matlang.dir/types/expression.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/types/expression.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/types/expression.cpp
-
-CMakeFiles/matlang.dir/types/expression.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/types/expression.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/types/expression.cpp > CMakeFiles/matlang.dir/types/expression.cpp.i
-
-CMakeFiles/matlang.dir/types/expression.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/types/expression.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/types/expression.cpp -o CMakeFiles/matlang.dir/types/expression.cpp.s
-
-CMakeFiles/matlang.dir/types/integer.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/types/integer.cpp.o: ../types/integer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/matlang.dir/types/integer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/types/integer.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/types/integer.cpp
-
-CMakeFiles/matlang.dir/types/integer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/types/integer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/types/integer.cpp > CMakeFiles/matlang.dir/types/integer.cpp.i
-
-CMakeFiles/matlang.dir/types/integer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/types/integer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/types/integer.cpp -o CMakeFiles/matlang.dir/types/integer.cpp.s
-
-CMakeFiles/matlang.dir/types/matrix.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/types/matrix.cpp.o: ../types/matrix.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/matlang.dir/types/matrix.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/types/matrix.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/types/matrix.cpp
-
-CMakeFiles/matlang.dir/types/matrix.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/types/matrix.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/types/matrix.cpp > CMakeFiles/matlang.dir/types/matrix.cpp.i
-
-CMakeFiles/matlang.dir/types/matrix.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/types/matrix.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/types/matrix.cpp -o CMakeFiles/matlang.dir/types/matrix.cpp.s
-
-CMakeFiles/matlang.dir/types/rational.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/types/rational.cpp.o: ../types/rational.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/matlang.dir/types/rational.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/types/rational.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/types/rational.cpp
-
-CMakeFiles/matlang.dir/types/rational.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/types/rational.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/types/rational.cpp > CMakeFiles/matlang.dir/types/rational.cpp.i
-
-CMakeFiles/matlang.dir/types/rational.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/types/rational.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/types/rational.cpp -o CMakeFiles/matlang.dir/types/rational.cpp.s
-
-CMakeFiles/matlang.dir/types/mcomplex.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/types/mcomplex.cpp.o: ../types/mcomplex.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/matlang.dir/types/mcomplex.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/types/mcomplex.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/types/mcomplex.cpp
-
-CMakeFiles/matlang.dir/types/mcomplex.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/types/mcomplex.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/types/mcomplex.cpp > CMakeFiles/matlang.dir/types/mcomplex.cpp.i
-
-CMakeFiles/matlang.dir/types/mcomplex.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/types/mcomplex.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/types/mcomplex.cpp -o CMakeFiles/matlang.dir/types/mcomplex.cpp.s
-
-CMakeFiles/matlang.dir/types/polynomial.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/types/polynomial.cpp.o: ../types/polynomial.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/matlang.dir/types/polynomial.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/types/polynomial.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/types/polynomial.cpp
-
-CMakeFiles/matlang.dir/types/polynomial.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/types/polynomial.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/types/polynomial.cpp > CMakeFiles/matlang.dir/types/polynomial.cpp.i
-
-CMakeFiles/matlang.dir/types/polynomial.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/types/polynomial.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/types/polynomial.cpp -o CMakeFiles/matlang.dir/types/polynomial.cpp.s
-
-CMakeFiles/matlang.dir/interpreter.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/interpreter.cpp.o: ../interpreter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/matlang.dir/interpreter.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/interpreter.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp
-
-CMakeFiles/matlang.dir/interpreter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/interpreter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp > CMakeFiles/matlang.dir/interpreter.cpp.i
-
-CMakeFiles/matlang.dir/interpreter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/interpreter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp -o CMakeFiles/matlang.dir/interpreter.cpp.s
-
 CMakeFiles/matlang.dir/dispatcher.cpp.o: CMakeFiles/matlang.dir/flags.make
 CMakeFiles/matlang.dir/dispatcher.cpp.o: ../dispatcher.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/matlang.dir/dispatcher.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/matlang.dir/dispatcher.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/dispatcher.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/dispatcher.cpp
 
 CMakeFiles/matlang.dir/dispatcher.cpp.i: cmake_force
@@ -161,22 +70,22 @@ CMakeFiles/matlang.dir/dispatcher.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/dispatcher.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/dispatcher.cpp -o CMakeFiles/matlang.dir/dispatcher.cpp.s
 
-CMakeFiles/matlang.dir/tokenizer.cpp.o: CMakeFiles/matlang.dir/flags.make
-CMakeFiles/matlang.dir/tokenizer.cpp.o: ../tokenizer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/matlang.dir/tokenizer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/tokenizer.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp
+CMakeFiles/matlang.dir/interpreter.cpp.o: CMakeFiles/matlang.dir/flags.make
+CMakeFiles/matlang.dir/interpreter.cpp.o: ../interpreter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/matlang.dir/interpreter.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/interpreter.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp
 
-CMakeFiles/matlang.dir/tokenizer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/tokenizer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp > CMakeFiles/matlang.dir/tokenizer.cpp.i
+CMakeFiles/matlang.dir/interpreter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/interpreter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp > CMakeFiles/matlang.dir/interpreter.cpp.i
 
-CMakeFiles/matlang.dir/tokenizer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/tokenizer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp -o CMakeFiles/matlang.dir/tokenizer.cpp.s
+CMakeFiles/matlang.dir/interpreter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/interpreter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp -o CMakeFiles/matlang.dir/interpreter.cpp.s
 
 CMakeFiles/matlang.dir/parser.cpp.o: CMakeFiles/matlang.dir/flags.make
 CMakeFiles/matlang.dir/parser.cpp.o: ../parser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/matlang.dir/parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/matlang.dir/parser.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/parser.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/parser.cpp
 
 CMakeFiles/matlang.dir/parser.cpp.i: cmake_force
@@ -187,9 +96,74 @@ CMakeFiles/matlang.dir/parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/parser.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/parser.cpp -o CMakeFiles/matlang.dir/parser.cpp.s
 
+CMakeFiles/matlang.dir/tokenizer.cpp.o: CMakeFiles/matlang.dir/flags.make
+CMakeFiles/matlang.dir/tokenizer.cpp.o: ../tokenizer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/matlang.dir/tokenizer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/tokenizer.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp
+
+CMakeFiles/matlang.dir/tokenizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/tokenizer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp > CMakeFiles/matlang.dir/tokenizer.cpp.i
+
+CMakeFiles/matlang.dir/tokenizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/tokenizer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp -o CMakeFiles/matlang.dir/tokenizer.cpp.s
+
+CMakeFiles/matlang.dir/comm.cpp.o: CMakeFiles/matlang.dir/flags.make
+CMakeFiles/matlang.dir/comm.cpp.o: ../comm.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/matlang.dir/comm.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/comm.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/comm.cpp
+
+CMakeFiles/matlang.dir/comm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/comm.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/comm.cpp > CMakeFiles/matlang.dir/comm.cpp.i
+
+CMakeFiles/matlang.dir/comm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/comm.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/comm.cpp -o CMakeFiles/matlang.dir/comm.cpp.s
+
+CMakeFiles/matlang.dir/expression.cpp.o: CMakeFiles/matlang.dir/flags.make
+CMakeFiles/matlang.dir/expression.cpp.o: ../expression.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/matlang.dir/expression.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/expression.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/expression.cpp
+
+CMakeFiles/matlang.dir/expression.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/expression.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/expression.cpp > CMakeFiles/matlang.dir/expression.cpp.i
+
+CMakeFiles/matlang.dir/expression.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/expression.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/expression.cpp -o CMakeFiles/matlang.dir/expression.cpp.s
+
+CMakeFiles/matlang.dir/integer.cpp.o: CMakeFiles/matlang.dir/flags.make
+CMakeFiles/matlang.dir/integer.cpp.o: ../integer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/matlang.dir/integer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/integer.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/integer.cpp
+
+CMakeFiles/matlang.dir/integer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/integer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/integer.cpp > CMakeFiles/matlang.dir/integer.cpp.i
+
+CMakeFiles/matlang.dir/integer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/integer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/integer.cpp -o CMakeFiles/matlang.dir/integer.cpp.s
+
+CMakeFiles/matlang.dir/matrix.cpp.o: CMakeFiles/matlang.dir/flags.make
+CMakeFiles/matlang.dir/matrix.cpp.o: ../matrix.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/matlang.dir/matrix.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/matrix.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/matrix.cpp
+
+CMakeFiles/matlang.dir/matrix.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/matlang.dir/matrix.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/User/Desktop/kek/matlang/matrix.cpp > CMakeFiles/matlang.dir/matrix.cpp.i
+
+CMakeFiles/matlang.dir/matrix.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/matlang.dir/matrix.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/User/Desktop/kek/matlang/matrix.cpp -o CMakeFiles/matlang.dir/matrix.cpp.s
+
 CMakeFiles/matlang.dir/main.cpp.o: CMakeFiles/matlang.dir/flags.make
 CMakeFiles/matlang.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/matlang.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/matlang.dir/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/matlang.dir/main.cpp.o -c /mnt/c/Users/User/Desktop/kek/matlang/main.cpp
 
 CMakeFiles/matlang.dir/main.cpp.i: cmake_force
@@ -202,35 +176,31 @@ CMakeFiles/matlang.dir/main.cpp.s: cmake_force
 
 # Object files for target matlang
 matlang_OBJECTS = \
-"CMakeFiles/matlang.dir/types/expression.cpp.o" \
-"CMakeFiles/matlang.dir/types/integer.cpp.o" \
-"CMakeFiles/matlang.dir/types/matrix.cpp.o" \
-"CMakeFiles/matlang.dir/types/rational.cpp.o" \
-"CMakeFiles/matlang.dir/types/mcomplex.cpp.o" \
-"CMakeFiles/matlang.dir/types/polynomial.cpp.o" \
-"CMakeFiles/matlang.dir/interpreter.cpp.o" \
 "CMakeFiles/matlang.dir/dispatcher.cpp.o" \
-"CMakeFiles/matlang.dir/tokenizer.cpp.o" \
+"CMakeFiles/matlang.dir/interpreter.cpp.o" \
 "CMakeFiles/matlang.dir/parser.cpp.o" \
+"CMakeFiles/matlang.dir/tokenizer.cpp.o" \
+"CMakeFiles/matlang.dir/comm.cpp.o" \
+"CMakeFiles/matlang.dir/expression.cpp.o" \
+"CMakeFiles/matlang.dir/integer.cpp.o" \
+"CMakeFiles/matlang.dir/matrix.cpp.o" \
 "CMakeFiles/matlang.dir/main.cpp.o"
 
 # External object files for target matlang
 matlang_EXTERNAL_OBJECTS =
 
-matlang: CMakeFiles/matlang.dir/types/expression.cpp.o
-matlang: CMakeFiles/matlang.dir/types/integer.cpp.o
-matlang: CMakeFiles/matlang.dir/types/matrix.cpp.o
-matlang: CMakeFiles/matlang.dir/types/rational.cpp.o
-matlang: CMakeFiles/matlang.dir/types/mcomplex.cpp.o
-matlang: CMakeFiles/matlang.dir/types/polynomial.cpp.o
-matlang: CMakeFiles/matlang.dir/interpreter.cpp.o
 matlang: CMakeFiles/matlang.dir/dispatcher.cpp.o
-matlang: CMakeFiles/matlang.dir/tokenizer.cpp.o
+matlang: CMakeFiles/matlang.dir/interpreter.cpp.o
 matlang: CMakeFiles/matlang.dir/parser.cpp.o
+matlang: CMakeFiles/matlang.dir/tokenizer.cpp.o
+matlang: CMakeFiles/matlang.dir/comm.cpp.o
+matlang: CMakeFiles/matlang.dir/expression.cpp.o
+matlang: CMakeFiles/matlang.dir/integer.cpp.o
+matlang: CMakeFiles/matlang.dir/matrix.cpp.o
 matlang: CMakeFiles/matlang.dir/main.cpp.o
 matlang: CMakeFiles/matlang.dir/build.make
 matlang: CMakeFiles/matlang.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable matlang"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable matlang"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/matlang.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

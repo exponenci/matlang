@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MATLANG_OBJECT_H
-#define MATLANG_OBJECT_H
-
 #include <memory>
 #include <list>
 #include <map>
@@ -11,6 +8,9 @@
 #include <vector>
 
 #include "error.h"
+
+#ifndef MATLANG_OBJECT_H
+#define MATLANG_OBJECT_H
 
 
 enum object_type {
@@ -21,6 +21,7 @@ enum object_type {
     SymbolT,
     IntegerT,
     MatrixT,
+    EvaluableT,
 };
 
 class Object : public std::enable_shared_from_this<Object> {
@@ -46,26 +47,27 @@ public:
 
 typedef std::shared_ptr<Object> sptrObj;
 
-template <class T>
-std::shared_ptr<T> As(const sptrObj& obj) {
+template<class T>
+std::shared_ptr<T> As(const sptrObj &obj) {
     return std::static_pointer_cast<T>(obj);
 }
 
-template <class T>
-bool Is(const sptrObj& obj) {
-    return static_cast<bool>(dynamic_cast<T*>(obj.get()));
+template<class T>
+bool Is(const sptrObj &obj) {
+    return static_cast<bool>(dynamic_cast<T *>(obj.get()));
 }
 
 class Evaluable : public Object {
 public:
-    virtual std::shared_ptr<Evaluable> operator*(const Evaluable& other) const = 0;
-    virtual std::shared_ptr<Evaluable> operator+(const Evaluable& other) const = 0;
-    virtual std::shared_ptr<Evaluable> operator-(const Evaluable& other) const = 0;
-    virtual std::shared_ptr<Evaluable> operator/(const Evaluable& other) const = 0;
-    virtual std::shared_ptr<Evaluable> operator*=(const Evaluable& other) = 0;
-    virtual std::shared_ptr<Evaluable> operator+=(const Evaluable& other) = 0;
-    virtual std::shared_ptr<Evaluable> operator-=(const Evaluable& other) = 0;
-    virtual std::shared_ptr<Evaluable> operator/=(const Evaluable& other) = 0;
+    explicit Evaluable(object_type type = object_type::EvaluableT) : Object(type) {}
+
+    virtual std::shared_ptr<Evaluable> operator+(const std::shared_ptr<Evaluable> &) const = 0;
+
+    virtual std::shared_ptr<Evaluable> operator-(const std::shared_ptr<Evaluable> &) const = 0;
+
+    virtual std::shared_ptr<Evaluable> operator*(const std::shared_ptr<Evaluable> &) const = 0;
+
+    virtual std::shared_ptr<Evaluable> operator/(const std::shared_ptr<Evaluable> &) const = 0;
 };
 
 class NoneObject : public Object {
@@ -95,21 +97,21 @@ public:
         return cmd_ptr_;
     }
 
-    void SetArgs(std::list<sptrObj>&& args) {
+    void SetArgs(std::list<sptrObj> &&args) {
         args_ = std::move(args);
     }
 
-    void AddArg(sptrObj&& arg) {
+    void AddArg(sptrObj &&arg) {
         args_.push_back(std::move(arg));
     }
 
-    std::list<sptrObj>& GetArgs() {
+    std::list<sptrObj> &GetArgs() {
         return args_;
     }
 
     std::string GetString() override {
         std::string str = cmd_ptr_->GetString() + "(";
-        for (const auto& ptr : args_) {
+        for (const auto &ptr: args_) {
             str += ptr->GetString() + ", ";
         }
         return str + ")";
@@ -122,12 +124,8 @@ private:
     std::string name_;
 
 public:
-    Symbol(const std::string& name) : Object(object_type::SymbolT), name_(name) {
+    Symbol(const std::string &name) : Object(object_type::SymbolT), name_(name) {
     }
-
-//    const std::string& GetName() const {
-//        return name_;
-//    }
 
     std::string GetString() override {
         return name_;

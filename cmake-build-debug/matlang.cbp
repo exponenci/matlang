@@ -84,13 +84,28 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/comm.cpp">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/comm.h">
+			<Option target="matlang"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/dispatcher.cpp">
 			<Option target="matlang"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/dispatcher.h">
 			<Option target="matlang"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/error.h">
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/expression.cpp">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/expression.h">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/integer.cpp">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/integer.h">
 			<Option target="matlang"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/interpreter.cpp">
@@ -100,6 +115,12 @@
 			<Option target="matlang"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/main.cpp">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/matrix.cpp">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/matrix.h">
 			<Option target="matlang"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/parser.cpp">
@@ -112,45 +133,6 @@
 			<Option target="matlang"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/tokenizer.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/expression.cpp">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/expression.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/integer.cpp">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/integer.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/matrix.cpp">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/matrix.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/mcomplex.cpp">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/mcomplex.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/object.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/polynomial.cpp">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/polynomial.h">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/rational.cpp">
-			<Option target="matlang"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/types/rational.h">
 			<Option target="matlang"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/CMakeLists.txt">

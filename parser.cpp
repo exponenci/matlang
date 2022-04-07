@@ -4,7 +4,10 @@
 std::list<std::shared_ptr<Object>> ReadScript(Tokenizer *tokenizer) {
     std::list<std::shared_ptr<Object>> result;
     while (!tokenizer->IsEnd()) {
-        result.push_back(Read(tokenizer));
+        std::shared_ptr<Object> matlangobj = Read(tokenizer);
+        if (!Is<NoneObject>(matlangobj)) {
+            result.push_back(matlangobj);
+        }
     }
     return result;
 }
@@ -54,7 +57,6 @@ std::shared_ptr<Object> Read(Tokenizer *tokenizer, size_t depth) {
                 }
             }
             if (depth == 0) {
-                tokenizer->Next();
                 curr_token = tokenizer->GetToken();
                 if (const SemicolonToken *semicolon_token_ptr = std::get_if<SemicolonToken>(&curr_token)) {
                     return object;
@@ -97,6 +99,12 @@ bool ExpectRead(Tokenizer *tokenizer, std::string_view sv) {
 
 std::shared_ptr<Object> ReadCommandArgs(Tokenizer *tokenizer, std::shared_ptr<Object> object, size_t depth) {
     // calling if tokenizer->GetToken() returns SymbolToken("(")
+    // at begin:
+    // function(args)_
+    // ^
+    // at end:
+    // function(args)_
+    //               ^
     Token curr_token = tokenizer->GetToken();
     if (const SymbolToken *syptr = std::get_if<SymbolToken>(&curr_token)) {
         if (!ExpectRead(tokenizer, "(")) {
@@ -177,6 +185,15 @@ std::list<std::shared_ptr<Object>> ReadExpression(Tokenizer *tokenizer, bool inn
                 symb_obj = std::make_shared<Symbol>(symbol_token_ptr->name_);
                 if (symbol_token_ptr->name_ == ")") {
                     --open_brackets_count;
+                    if (inner_expr && open_brackets_count == 0) {
+                        if (is_last_arg) {
+                            *is_last_arg = (symbol_token_ptr->name_ == ")");
+                        }
+                        tokenizer->Next();
+                        break;
+                    }
+                } else if (symbol_token_ptr->name_ == "(") {
+                    ++open_brackets_count;
                 }
             } else {
                 symb_obj = std::make_shared<Integer>(constant_token_ptr->value_);
@@ -257,7 +274,7 @@ std::shared_ptr<Object> ReadMatrix(Tokenizer *tokenizer) {
             throw SyntaxError("invalid mat init (in outer vectors)\n");
         }
     }
-    return std::make_shared<Matrix<>>(std::move(objects));
+    return std::make_shared<Matrix>(std::move(objects));
 }
 
 

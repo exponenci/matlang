@@ -1,64 +1,23 @@
 #pragma  once
-#ifndef MATLANG_DISPATCHER_H
-#define MATLANG_DISPATCHER_H
 
-#include "types/object.h"
+#include "object.h"
+#include "matrix.h"
+#include "integer.h"
+#include "expression.h"
+#include "comm.h"
+
 
 #include <stack>
-#include <functional>
 #include <map>
 #include <memory>
 #include <string>
 
 
-namespace cmd {
-    enum cmd_type {
-        Print,
-        Transpose,
-        Det,
-        Inv,
-        Rank,
-        ToTriangle,
-        ToDiag,
-        Rrref,
-        Init,
-        Arithmetic
-    };
-}
+#ifndef MATLANG_DISPATCHER_H
+#define MATLANG_DISPATCHER_H
+
 
 class Dispatcher;
-
-class BaseCommand {
-private:
-    cmd::cmd_type type_;
-
-public:
-    BaseCommand(cmd::cmd_type, Dispatcher *dp);
-
-    virtual std::shared_ptr<Object> Run(std::list<std::shared_ptr<Object>> &&) = 0;
-
-    virtual ~BaseCommand() = default;
-
-    template<class T>
-    std::shared_ptr<T> CastTo(std::shared_ptr<Object> &, bool = true);
-
-    Dispatcher *dp_;
-};
-
-class ArithmeticCommand : public BaseCommand {
-private:
-    typedef std::shared_ptr<Object> sptrObj;
-    std::function<sptrObj(sptrObj, sptrObj)> func_;
-
-public:
-    ArithmeticCommand(Dispatcher* dp, std::function<sptrObj(sptrObj, sptrObj)>&& f)
-            : BaseCommand(cmd::cmd_type::Arithmetic, dp),
-              func_(std::move(f)) {
-    }
-
-    std::shared_ptr<Object> Run(std::list<std::shared_ptr<Object>>&& args) override;
-};
-
 
 class Deleter {
 private:
@@ -85,28 +44,7 @@ private:
 
     Dispatcher();
 
-public:
-    std::shared_ptr<Object> RunCommandLine(std::shared_ptr<Object>);
-
-    static Dispatcher &Instance();
-
-    std::shared_ptr<BaseCommand> operator()(const std::string &);
-
-    [[nodiscard]] std::shared_ptr<Object> At(const std::string& variable) const;
-
-    void Init(const std::string&, std::shared_ptr<Object>);
-
-    static int Priority(const std::shared_ptr<Object>& sptr) {
-        if (IsSymbolEqual(sptr, "+")  || IsSymbolEqual(sptr, "-")) {
-            return 1;
-        }
-        if (IsSymbolEqual(sptr, "*") || IsSymbolEqual(sptr, "/")) {
-            return 2;
-        }
-        return 0;
-    }
-
-    static bool IsOperation(const std::shared_ptr<Object>& sptr) {
+    static bool IsArithmeticOperation(const std::shared_ptr<Object> &sptr) {
         if (!Is<Symbol>(sptr)) {
             return false;
         }
@@ -114,20 +52,23 @@ public:
         return value == "+" || value == "-" || value == "*" || value == "/";
     }
 
-    static bool IsSymbolEqual(const std::shared_ptr<Object>& sptr, std::string_view sv) {
-        return Is<Symbol>(sptr) && As<Symbol>(sptr)->GetString() == sv;
-    }
+public:
+    static Dispatcher &Instance();
 
+    [[nodiscard]] std::shared_ptr<Object> At(const std::string &variable) const;
 
-    std::shared_ptr<Object> Eval(std::list<std::shared_ptr<Object>>& args) {
+    void InitObject(const std::string &, std::shared_ptr<Object>);
+
+    std::shared_ptr<Object> Eval(std::list<std::shared_ptr<Object>> &args) {
         std::stack<std::shared_ptr<Object>> stack;
-        for (auto &arg : args) {
-            if (IsOperation(arg)){
+        for (auto &arg: args) {
+            if (IsArithmeticOperation(arg)) {
                 std::shared_ptr<Object> value_1 = stack.top();
                 stack.pop();
                 std::shared_ptr<Object> value_2 = stack.top();
                 stack.pop();
-                stack.push(Invoke(As<Symbol>(arg)->GetString(), value_2, value_1));
+                std::list<std::shared_ptr<Object>> args_list{value_2, value_1};
+                stack.push(Invoke(As<Symbol>(arg)->GetString(), args_list));
             } else {
                 stack.push(arg);
             }
@@ -135,15 +76,21 @@ public:
         return stack.top();
     }
 
-    std::shared_ptr<Object> Invoke(const std::string& command, std::list<std::shared_ptr<Object>>& args) {
-        // TODO
-        return nullptr;
-    }
-    std::shared_ptr<Object> Invoke(const std::string& command, std::shared_ptr<Object>& arg1, std::shared_ptr<Object>& arg2) {
-        // TODO
-        return nullptr;
+    std::shared_ptr<Object> Invoke(const std::string &command, std::list<std::shared_ptr<Object>> &args) {
+        if (command == "init") {
+            if (args.size() != 2) {
+                throw RuntimeError("Dispatcher: invalid arguments were provided for initialization\n");
+            }
+            InitObject(As<Symbol>(args.front())->GetString(), args.back());
+            return instance->variables_.at(As<Symbol>(args.front())->GetString());
+        }
+        if (!instance->registers_.contains(command)) {
+            throw NameError("Dispatcher: function not found\n");
+        }
+        return instance->registers_.at(command)->Run(args);
     }
 
+    bool IsSystemSymbol(const std::string&);
 };
 
 
