@@ -8,7 +8,7 @@
 #define MATLANG_TOKENIZER_H
 
 
-enum class BracketToken { OPEN, CLOSE }; // []
+enum class BracketToken { OPEN, CLOSE }; // [] (do i need some tokens for {} ()?)
 
 struct SymbolToken {
     std::string name_;
@@ -35,12 +35,8 @@ struct SemicolonToken {
     bool operator==(const SemicolonToken&) const;
 };
 
-struct DivisionToken {
-    bool operator==(const DivisionToken&) const;
-};
-
 using Token =
-std::variant<BracketToken, SymbolToken, ConstantToken, SemicolonToken, DivisionToken>;
+std::variant<BracketToken, SymbolToken, ConstantToken, SemicolonToken>;
 
 class Tokenizer {
 private:
@@ -63,17 +59,19 @@ public:
     Token GetToken();
 
 private:
-    int ReadNumber();
+    int ReadNumber(); // reads number till first non-digit symbol
 
-    std::string ReadSymbol();
+    std::string ReadSymbol(); // reads string-type value till first space symbol
 
-    void ClearSpace();
+    void ClearSpace(); // reads space symbols till first non-space symbol
 
-    bool OnEOF();
+    bool OnEOF(); // returns true on eof
 
-    static bool IsValidStringBegin(int);
+    constexpr static bool IsSpecialSymbol(int); // special symbols reserved by system
+    constexpr static bool IsProhibitedSymbol(int); // prohibited by language syntax symbols
 
-    static bool IsSpecialSymbol(int);
+    // now we parse strings like "-a" as expression with 2 objects: "-" and value corresponding to variable "a"
+    // TODO fix this in Expression when generate postfix from infix and/or when evaluate expression via Dispatcher::Eval
 };
 
 #endif //MATLANG_TOKENIZER_H

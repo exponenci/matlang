@@ -13,9 +13,6 @@ bool SemicolonToken::operator==(const SemicolonToken &) const {
     return true;
 }
 
-bool DivisionToken::operator==(const DivisionToken &) const {
-    return true;
-}
 
 Tokenizer::Tokenizer(std::istream *in) : in_(in) {
     Next();
@@ -29,8 +26,7 @@ bool Tokenizer::IsEnd() {
     return already_read_;
 }
 
-#include <iostream>
-
+// special tokens for lang: (){},.^+-*/<=>  ;[]
 void Tokenizer::Next() {
     ClearSpace();
     if (OnEOF()) {
@@ -38,41 +34,28 @@ void Tokenizer::Next() {
         return;
     }
     int curr_in_value = in_->peek();
-    if (curr_in_value == 40 || curr_in_value == 41 || curr_in_value == 42 || curr_in_value == 44 ||
-            curr_in_value == 60 || curr_in_value == 61 || curr_in_value == 62) {
+    if (IsProhibitedSymbol(curr_in_value)) {
+        throw SyntaxError("Tokenizer::Next: prohibited symbol was used in script\n");
+    } else if (IsSpecialSymbol(curr_in_value)) {
         in_->get();
-        curr_token_ = SymbolToken(curr_in_value);
-    } else if (curr_in_value == 43) {  // `+`
-        in_->get();
-        if (std::isdigit(in_->peek())) {
+        if (curr_in_value == 43 && std::isdigit(in_->peek())) { // +178
             curr_token_ = ConstantToken(ReadNumber());
-        } else {
-            curr_token_ = SymbolToken("+");
-        }
-    } else if (curr_in_value == 45) {  // `-`
-        in_->get();
-        if (std::isdigit(in_->peek())) {
+        } else if (curr_in_value == 45 && std::isdigit(in_->peek())) { // -42
             curr_token_ = ConstantToken(-ReadNumber());
-        } else {
-            curr_token_ = SymbolToken("-");
+        } else if (curr_in_value == 59) { // ;
+            curr_token_ = SemicolonToken();
+        } else if (curr_in_value == 91) { // [
+            curr_token_ = BracketToken::OPEN;
+        } else if (curr_in_value == 93) { // ]
+            curr_token_ = BracketToken::CLOSE;
+        } else {                          // !&()*,./<=>^{|}~+-
+            curr_token_ = SymbolToken(curr_in_value);
         }
-    } else if (curr_in_value == 47) {
-        in_->get();
-        curr_token_ = DivisionToken();  // `/`
-    } else if (curr_in_value == 59) {
-        in_->get();
-        curr_token_ = SemicolonToken();  // `;`
-    } else if (curr_in_value == 91) {
-        in_->get();
-        curr_token_ = BracketToken::OPEN;  // `[`
-    } else if (curr_in_value == 93) {
-        in_->get();
-        curr_token_ = BracketToken::CLOSE;  // `]`
     } else {
         if (std::isdigit(curr_in_value)) {
             curr_token_ = ConstantToken(ReadNumber());
-            if (std::isalpha(in_->peek())) {
-                throw SyntaxError("invalid name of object\n");
+            if (std::isalpha(in_->peek())) { // 213x
+                throw SyntaxError("Tokenizer::Next: invalid variable name\n");
             }
         } else {
             curr_token_ = SymbolToken(ReadSymbol());
@@ -94,10 +77,12 @@ int Tokenizer::ReadNumber() {
 
 std::string Tokenizer::ReadSymbol() {
     std::string read_value;
-    if (!IsValidStringBegin(in_->peek())) {
+    if (!std::isalpha(in_->peek()) && in_->peek() != 95) { // valid string beginning is only _A-Za-z
         throw SyntaxError{"invalid `symbol` declaration"};
     }
-    while (!OnEOF() && !std::isspace(in_->peek()) && !IsSpecialSymbol(in_->peek())) {
+    read_value += static_cast<char>(in_->get());
+    // valid string names consist of only _A-Za-z0-9
+    while (!OnEOF() && (std::isalnum(in_->peek()) || in_->peek() == 95)) {
         read_value += static_cast<char>(in_->get());
     }
     return read_value;
@@ -115,15 +100,23 @@ bool Tokenizer::OnEOF() {
     return !std::char_traits<char>::not_eof(in_->peek());
 }
 
-bool Tokenizer::IsValidStringBegin(int char_code) {
-    return 59 < char_code && char_code < 123 && char_code != 63 && \
-            char_code != 64 && char_code != 96;
+constexpr bool Tokenizer::IsProhibitedSymbol(int char_code) {
+    // prohibited symbols:   $#%'"?@\ //
+    constexpr std::string_view prohibited_symbols = "$#%'\"?@\\";
+    return prohibited_symbols.find(static_cast<char>(char_code)) != std::string_view::npos;
 }
 
-bool Tokenizer::IsSpecialSymbol(int char_code) {
-    // returns true if char is ont of '*+,-./;[]>=<'
-    return char_code == 42 || char_code == 43 || char_code == 45 || char_code == 46 || \
-        char_code == 47 || char_code == 59 || char_code == 91 || char_code == 93 || \
-        char_code == 60 || char_code == 61 || char_code == 62 || char_code == 40 || \
-        char_code == 41 || char_code == 44;
+constexpr bool Tokenizer::IsSpecialSymbol(int char_code) {
+    // returns true if char is ont of '!&()*+,-./:;<=>[]^{|}~'
+    // !&| - used for not, and, or respectively
+    // ()[]{} - brackets for functions, vectors/matrices, code blocks
+    // *+-/^ - arithmetic operations
+    // :,.~ - dunno why, perhaps will be useful one day
+    // <=> for comparison (in future it cat be ok to handle <= and >=)
+    // ; - command line end
+    constexpr std::string_view special_symbols = "!&()*+,-./:;<=>[]^{|}~";
+    return special_symbols.find(static_cast<char>(char_code)) != std::string_view::npos;
+//    return char_code == 33 || char_code == 38 ||
+//           (39 < char_code && char_code < 48) || (57 < char_code && char_code < 63) ||
+//           (90 < char_code && char_code < 95 && char_code != 92) || (122 < char_code && char_code < 127);
 }

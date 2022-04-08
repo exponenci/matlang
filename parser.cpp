@@ -1,10 +1,9 @@
 #include "parser.h"
 
-
-std::list<std::shared_ptr<Object>> ReadScript(Tokenizer *tokenizer) {
-    std::list<std::shared_ptr<Object>> result;
+std::list<sptrObj> ReadScript(Tokenizer *tokenizer) {
+    std::list<sptrObj> result;
     while (!tokenizer->IsEnd()) {
-        std::shared_ptr<Object> matlangobj = Read(tokenizer);
+        sptrObj matlangobj = Read(tokenizer);
         if (!Is<NoneObject>(matlangobj)) {
             result.push_back(matlangobj);
         }
@@ -12,70 +11,83 @@ std::list<std::shared_ptr<Object>> ReadScript(Tokenizer *tokenizer) {
     return result;
 }
 
-std::shared_ptr<Object> Read(Tokenizer *tokenizer, size_t depth) {
-    /* */
+sptrObj Read(Tokenizer *tokenizer, size_t depth) {
     if (tokenizer->IsEnd()) {
         return nullptr;
     }
-    std::shared_ptr<Object> object;
+    sptrObj object;
     Token curr_token = tokenizer->GetToken();
     if (const SymbolToken *symbol_token_ptr = std::get_if<SymbolToken>(&curr_token)) {
-        if (symbol_token_ptr->name_ == "mat") { // we are initializing some variable matrix
+        if (symbol_token_ptr->name_ == "let") { // we are initializing variable
             if (depth != 0) {
-                throw SyntaxError("invalid mat init (you must init mat in separate line)\n");
+                throw SyntaxError("Read: let must begin from a new command line\n");
             }
             object = std::make_shared<CommandObject>();
             As<CommandObject>(object)->SetCommand(std::make_shared<Symbol>("init"));
-            tokenizer->Next();
-            std::shared_ptr<Object> varname = Read(tokenizer, depth + 1);
+            tokenizer->Next(); // after this tokenizer->GetToken() is expected to return
+            // shared_ptr on Symbol object (containing variable name)
+            sptrObj varname = Read(tokenizer, depth + 1); // read variable name with a depth > 0
             if (Is<Symbol>(varname)) {
-                As<CommandObject>(object)->AddArg(std::move(varname));
+                As<CommandObject>(object)->AddArg(std::move(varname));  // TODO perhaps we don't need to keep
+                // it in Object type and simply move in std::string
             } else {
-                throw SyntaxError("invalid mat init (invalid variable name)\n");
+                throw SyntaxError("Read: variable name to be initialized is not a acceptable\n");
             }
             if (!ExpectRead(tokenizer, "=")) {
-                throw SyntaxError("invalid mat init (you must declare assignment explicitly)\n");
+                throw SyntaxError("Read: invalid variable declaration (assignment sign was expected)\n");
             }
-            std::list<std::shared_ptr<Object>> expr = ReadExpression(tokenizer);
+            // here we get list of objects which would specify initializing object
+            std::list<sptrObj> expr = ReadExpression(tokenizer);
             if (expr.size() == 1) {
+                // for size 1 - we simply keep it as it is
                 As<CommandObject>(object)->AddArg(std::move(expr.front()));
             } else if (expr.size() > 1) {
+                // otherwise, it is expression to be calculated
                 As<CommandObject>(object)->AddArg(std::make_shared<Expression>(std::move(expr)));
             } else {
-                throw SyntaxError("invalid mat init (you must assign variable something)\n");
+                throw SyntaxError("Read: object to be initialized was expected, nothing was received\n");
             }
-        } else { // we are reading symbol
+            // at this point tokenizer->GetToken() is expected to return semicolon
+        } else { // we are reading Symbol
             object = std::make_shared<Symbol>(symbol_token_ptr->name_);
             tokenizer->Next();
             curr_token = tokenizer->GetToken();
             if (const SymbolToken *token_ptr = std::get_if<SymbolToken>(&curr_token)) {
-                if (token_ptr->name_ == "(") {
-                    std::shared_ptr<Object> cmd_obj = std::make_shared<CommandObject>();
+                if (token_ptr->name_ == "(") { // if reading symbol is a function call
+                    sptrObj cmd_obj = std::make_shared<CommandObject>();
                     As<CommandObject>(cmd_obj)->SetCommand(object);
                     object = cmd_obj;
                     ReadCommandArgs(tokenizer, cmd_obj, depth);
                 }
-            }
-            if (depth == 0) {
-                curr_token = tokenizer->GetToken();
-                if (const SemicolonToken *semicolon_token_ptr = std::get_if<SemicolonToken>(&curr_token)) {
-                    return object;
-                } else {
-                    throw SyntaxError("invalid function call (semicolon was forgotten)\n");
+                // func(arg1, arg2)_
+                //                 ^ <- tokenizer->GetToken()
+                // TODO imho we always are on depth == 0 when we are calling Read to read function
+                if (depth == 0) {
+                    // if it is on new command line
+                    // tokenizer->GetToken() is expected to return semicolon
+                    curr_token = tokenizer->GetToken();
+                    if (const SemicolonToken *semicolon_token_ptr = std::get_if<SemicolonToken>(&curr_token)) {
+                        return object;
+                    } else {
+                        throw SyntaxError("invalid function call (semicolon was forgotten)\n");
+                    }
                 }
             }
+            // either `func(arg1, arg2)_` or `string_`
+            //                         ^            ^
             return object;
         }
     } else if (const ConstantToken *constant_token_ptr = std::get_if<ConstantToken>(&curr_token)) {
+        // TODO imho we will never reach this code; so check it out
         if (depth > 0) {
             object = std::make_shared<Integer>(constant_token_ptr->value_);
         } else {
-            throw SyntaxError("invalid string beginning\n");
+            throw SyntaxError("Read: invalid command line beginning (with integers)\n");
         }
     } else if (const SemicolonToken *semicolon_token_ptr = std::get_if<SemicolonToken>(&curr_token)) {
-        object = std::make_shared<NoneObject>();
-    } else {
-        throw SyntaxError("invalid string beginning\n");
+        object = std::make_shared<NoneObject>(); // TODO should we return nullptr instead?
+    } else { // if it is brackets token []
+        throw SyntaxError("Read: invalid command line beginning (with brackets)\n");
     }
     tokenizer->Next();
     return object;
@@ -85,9 +97,8 @@ bool ExpectRead(Tokenizer *tokenizer, std::string_view sv) {
     if (tokenizer->IsEnd()) {
         return false;
     }
-    std::shared_ptr<Object> object;
-    Token curr_token;
-    curr_token = tokenizer->GetToken();
+    sptrObj object;
+    Token curr_token = tokenizer->GetToken();
     if (const SymbolToken *symbol_token_ptr = std::get_if<SymbolToken>(&curr_token)) {
         if (symbol_token_ptr->name_ == sv) {
             tokenizer->Next();
@@ -97,64 +108,72 @@ bool ExpectRead(Tokenizer *tokenizer, std::string_view sv) {
     return false;
 }
 
-std::shared_ptr<Object> ReadCommandArgs(Tokenizer *tokenizer, std::shared_ptr<Object> object, size_t depth) {
+sptrObj ReadCommandArgs(Tokenizer *tokenizer, sptrObj object, size_t depth) { // TODO remove depth argument
     // calling if tokenizer->GetToken() returns SymbolToken("(")
     // at begin:
     // function(args)_
-    // ^
+    //         ^
     // at end:
     // function(args)_
     //               ^
     Token curr_token = tokenizer->GetToken();
-    if (const SymbolToken *syptr = std::get_if<SymbolToken>(&curr_token)) {
-        if (!ExpectRead(tokenizer, "(")) {
-            throw SyntaxError("invalid function call (opening bracket)\n");
-        }
-        while (true) { // reading args of function
-            curr_token = tokenizer->GetToken();
-            const SymbolToken *symbol_token_ptr = std::get_if<SymbolToken>(&curr_token);
-            const ConstantToken *constant_token_ptr = std::get_if<ConstantToken>(&curr_token);
-            const BracketToken *bracket_token_ptr = std::get_if<BracketToken>(&curr_token);
-            if (bracket_token_ptr && *bracket_token_ptr == BracketToken::CLOSE) {
-                throw SyntaxError("invalid function argument\n"); // throw error: print([]])
-            } else if (symbol_token_ptr || constant_token_ptr || bracket_token_ptr) {
-                if (symbol_token_ptr && symbol_token_ptr->name_ == ")") { // function arguments end
-                    tokenizer->Next();
-                    break;
-                }
-                bool is_last_arg;
-                auto data = ReadExpression(tokenizer, true, &is_last_arg);
-                if (data.size() == 1) {
-                    As<CommandObject>(object)->AddArg(std::move(data.front()));
-                } else if (data.size() > 1) {
-                    As<CommandObject>(object)->AddArg(std::make_shared<Expression>(std::move(data)));
-                } else {
-                    throw SyntaxError("invalid function call (invalid arguments)\n");
-                }
-                if (is_last_arg) {
-                    break;
-                }
-                continue;
-            } else if (const SemicolonToken *semicolon_token = std::get_if<SemicolonToken>(&curr_token)) {
-                break;
-            } else { // Division symbol
-                throw SyntaxError("invalid syntax with division symbol (in function args read)\n");
-            }
-            tokenizer->Next();
-        }
-        curr_token = tokenizer->GetToken();
-        const SemicolonToken *semi_token_ptr = std::get_if<SemicolonToken>(&curr_token);
-        if (depth == 0 && !semi_token_ptr) {
-            throw SyntaxError("invalid function call (semicolon was forgotten 2)\n");
-        }
-    } else {
-        throw SyntaxError("invalid function call (opening bracket expected)\n");
+    SymbolToken *sym_ptr = std::get_if<SymbolToken>(&curr_token);
+    if (!sym_ptr || !ExpectRead(tokenizer, "(")) {
+        throw SyntaxError("ReadCommandArgs: invalid function call (opening bracket was expected)\n");
     }
+    while (true) { // reading args of function
+        curr_token = tokenizer->GetToken(); // first arg of function
+        const SymbolToken *symbol_token_ptr = std::get_if<SymbolToken>(&curr_token);
+        const ConstantToken *constant_token_ptr = std::get_if<ConstantToken>(&curr_token);
+        const BracketToken *bracket_token_ptr = std::get_if<BracketToken>(&curr_token);
+        if (bracket_token_ptr && *bracket_token_ptr == BracketToken::CLOSE) {
+            // TODO is it real `throw error: print([]])` ??
+            throw SyntaxError("ReadCommandArgs: invalid function argument (closing array branch was not expected)\n");
+        } else if (symbol_token_ptr || constant_token_ptr || bracket_token_ptr) {
+            // if it is symbol (ex: variable) or integer or matrix (or, as planned for future, vector)
+            if (symbol_token_ptr && symbol_token_ptr->name_ == ")") { // function arguments end
+                // TODO think: we are here only if function was called without arguments, like func()
+                // actually, we can remove this block, because ReadExpression handles these situation too
+                // TODO: remove this block
+                tokenizer->Next();
+                break;
+            }
+            bool is_last_arg; // if it will be true then we received last argument of func and should break loop
+            std::list<sptrObj> data = ReadExpression(tokenizer, true, &is_last_arg);
+            if (data.size() == 1) {
+                As<CommandObject>(object)->AddArg(std::move(data.front()));
+            } else if (data.size() > 1) {
+                As<CommandObject>(object)->AddArg(std::make_shared<Expression>(std::move(data)));
+            } else { // if there is no expression received
+                throw SyntaxError("ReadCommandArgs: invalid function call (invalid arguments pack)\n");
+            }
+            // here tokenizer->GetToken() is expected to return:
+            // func(arg1_expr, arg2_expr, arg2_expr)
+            //                 ^                    ^    <-- one of these 2 positions
+            if (is_last_arg) {
+                break;
+            }
+            continue;
+        } else if (const SemicolonToken *semicolon_token = std::get_if<SemicolonToken>(&curr_token)) {
+            break;
+        } else {
+            throw SyntaxError("invalid syntax with unknown symbol (in function args read)\n");
+        }
+        tokenizer->Next();
+    }
+    /* no need for this, because this situation is already being handled in calling funcion
+    curr_token = tokenizer->GetToken();
+    const SemicolonToken *semi_token_ptr = std::get_if<SemicolonToken>(&curr_token);
+    if (depth == 0 && !semi_token_ptr) {
+        throw SyntaxError("invalid function call (semicolon was forgotten 2)\n");
+    }
+    """*/
     return object;
 }
 
 
-std::list<std::shared_ptr<Object>> ReadExpression(Tokenizer *tokenizer, bool inner_expr, bool *is_last_arg) {
+std::list<sptrObj> ReadExpression(Tokenizer *tokenizer, bool inner_expr, bool *is_last_arg) {
+    // TODO what is idea of inner_expr argument???
     // at calling moment:
     // val + 1 * A, _        val + 1 * A) _        val + 1 * A] _
     //  ^                     ^                     ^
@@ -162,9 +181,9 @@ std::list<std::shared_ptr<Object>> ReadExpression(Tokenizer *tokenizer, bool inn
     // val + 1 * A, _        val + 1 * A) _        val + 1 * A] _
     //              ^                     ^                     ^
     // in all cases returns list{Symbol("val"), Symbol("+"), Number(1), Symbol("*"), Symbol("A")}
-    std::list<std::shared_ptr<Object>> objects;
+    std::list<sptrObj> objects;
     Token curr_token;
-    size_t open_brackets_count = 0;
+    size_t open_brackets_count = 0; // we are going to count arithmetic brackets () to handle arithmetic expressions
     while (true) {
         if (tokenizer->IsEnd()) {
             break; // throw error?
@@ -173,18 +192,21 @@ std::list<std::shared_ptr<Object>> ReadExpression(Tokenizer *tokenizer, bool inn
         const ConstantToken *constant_token_ptr = std::get_if<ConstantToken>(&curr_token);
         const SymbolToken *symbol_token_ptr = std::get_if<SymbolToken>(&curr_token);
         if (symbol_token_ptr || constant_token_ptr) {
-            if (inner_expr && symbol_token_ptr && (symbol_token_ptr->name_ == "," || symbol_token_ptr->name_ == ")") && open_brackets_count == 0) {
-                if (is_last_arg) {
+            if (inner_expr && symbol_token_ptr && (symbol_token_ptr->name_ == "," || symbol_token_ptr->name_ == ")") &&
+                open_brackets_count == 0) {
+                // what is inner_expr?
+                if (is_last_arg) { // if we have pointer to be filled
                     *is_last_arg = (symbol_token_ptr->name_ == ")");
                 }
                 tokenizer->Next();
                 break;
             }
-            std::shared_ptr<Object> symb_obj;
-            if (symbol_token_ptr) {
+            sptrObj symb_obj;
+            if (symbol_token_ptr) { // f(a +
                 symb_obj = std::make_shared<Symbol>(symbol_token_ptr->name_);
                 if (symbol_token_ptr->name_ == ")") {
-                    --open_brackets_count;
+                    // TODO something wrong is here ...
+                    --open_brackets_count; // f(3 * (1 + 2))
                     if (inner_expr && open_brackets_count == 0) {
                         if (is_last_arg) {
                             *is_last_arg = (symbol_token_ptr->name_ == ")");
@@ -198,7 +220,7 @@ std::list<std::shared_ptr<Object>> ReadExpression(Tokenizer *tokenizer, bool inn
             } else {
                 symb_obj = std::make_shared<Integer>(constant_token_ptr->value_);
             }
-            tokenizer->Next();
+            tokenizer->Next(); // a +
             curr_token = tokenizer->GetToken();
             if (const SymbolToken *token_ptr = std::get_if<SymbolToken>(&curr_token)) {
                 if (symbol_token_ptr && token_ptr->name_ == "(") {
@@ -229,8 +251,8 @@ std::list<std::shared_ptr<Object>> ReadExpression(Tokenizer *tokenizer, bool inn
             }
         } else if (const SemicolonToken *semicolon_token_ptr = std::get_if<SemicolonToken>(&curr_token)) {
             break;
-        } else { // Division symbol
-            throw SyntaxError("invalid syntax with division symbol (in expression read)\n");
+        } else {
+            throw SyntaxError("invalid syntax with unknown symbol (in expression read)\n");
         }
         tokenizer->Next();
     }
