@@ -339,6 +339,33 @@ parser.cpp.s:
 	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/parser.cpp.s
 .PHONY : parser.cpp.s
 
+rational.o: rational.cpp.o
+
+.PHONY : rational.o
+
+# target to build an object file
+rational.cpp.o:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/rational.cpp.o
+.PHONY : rational.cpp.o
+
+rational.i: rational.cpp.i
+
+.PHONY : rational.i
+
+# target to preprocess a source file
+rational.cpp.i:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/rational.cpp.i
+.PHONY : rational.cpp.i
+
+rational.s: rational.cpp.s
+
+.PHONY : rational.s
+
+# target to generate assembly for a file
+rational.cpp.s:
+	$(MAKE) -f CMakeFiles/matlang.dir/build.make CMakeFiles/matlang.dir/rational.cpp.s
+.PHONY : rational.cpp.s
+
 tokenizer.o: tokenizer.cpp.o
 
 .PHONY : tokenizer.o
@@ -399,6 +426,9 @@ help:
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"
+	@echo "... rational.o"
+	@echo "... rational.i"
+	@echo "... rational.s"
 	@echo "... tokenizer.o"
 	@echo "... tokenizer.i"
 	@echo "... tokenizer.s"

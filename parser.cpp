@@ -30,32 +30,23 @@ sptrObj Read(Tokenizer *tokenizer, size_t depth) {
     Token curr_token = tokenizer->GetToken();
     if (const SymbolToken *symbol_token_ptr = std::get_if<SymbolToken>(&curr_token)) {
         if (symbol_token_ptr->name_ == "let") { // we are initializing variable
-            if (depth != 0) {
-                throw SyntaxError("Read: let must begin from a new command line\n");
-            }
             object = std::make_shared<CommandObject>();
             As<CommandObject>(object)->SetCommand(std::make_shared<Symbol>("init"));
             tokenizer->Next(); // after this tokenizer->GetToken() is expected to return
-            // shared_ptr on Symbol object (containing variable name)
-            sptrObj varname = Read(tokenizer, depth + 1); // read variable name with a depth > 0
-            if (Is<Symbol>(varname)) {
-                As<CommandObject>(object)->AddArg(std::move(varname));  // TODO perhaps we don't need to keep sptrObj in command name
-                // it in Object type and simply move in std::string
-            } else {
+            curr_token = tokenizer->GetToken();
+            symbol_token_ptr = std::get_if<SymbolToken>(&curr_token);
+            if (!symbol_token_ptr) {
                 throw SyntaxError("Read: variable name to be initialized is not a acceptable\n");
             }
+            As<CommandObject>(object)->AddArg(std::move(std::make_shared<Symbol>(symbol_token_ptr->name_)));
+            tokenizer->Next();
             if (!ExpectRead(tokenizer, "=")) {
                 throw SyntaxError("Read: invalid variable declaration (assignment sign was expected)\n");
             }
-            // here we get list of objects which would specify initializing object
             As<CommandObject>(object)->AddArg(ReadExpression(tokenizer));
-            // at this point tokenizer->GetToken() is expected to return semicolon
         } else { // we are reading Symbol
             object = std::make_shared<Symbol>(symbol_token_ptr->name_);
             tokenizer->Next();
-            if (depth != 0) {
-                return object;
-            }
             curr_token = tokenizer->GetToken();
             if (const SymbolToken *token_ptr = std::get_if<SymbolToken>(&curr_token)) {
                 if (token_ptr->name_ == "(") { // if reading symbol is a function call
@@ -63,30 +54,20 @@ sptrObj Read(Tokenizer *tokenizer, size_t depth) {
                     As<CommandObject>(cmd_obj)->SetCommand(object);
                     object = cmd_obj;
                     ReadCommandArgs(tokenizer, cmd_obj);
+                } else {
+                    throw SyntaxError("Read: invalid command line beginning (function call was expected)\n");
                 }
-                // func(arg1, arg2)_
-                //                 ^ <- tokenizer->GetToken()
-                // TODO imho we always are on depth == 0 when we are calling Read to read function calling
-//                if (depth == 0) {
-                // if it is on new command line
-                // tokenizer->GetToken() is expected to return semicolon
-
-//                }
+            } else {
+                throw SyntaxError(
+                        "Read: invalid command line beginning (function call was expected, unknown symbol was received)\n");
             }
-            // either `func(arg1, arg2)_` or `string_`
-            //                         ^            ^
+            // func(arg1, arg2)_
+            //                 ^ <- tokenizer->GetToken()
         }
-//    } else if (const ConstantToken *constant_token_ptr = std::get_if<ConstantToken>(&curr_token)) {
-//        // TODO imho we will never reach this code; so check it out
-//        if (depth > 0) {
-//            object = std::make_shared<Integer>(constant_token_ptr->value_);
-//        } else {
-//            throw SyntaxError("Read: invalid command line beginning (with integers)\n");
-//        }
     } else if (const SemicolonToken *semicolon_token_ptr = std::get_if<SemicolonToken>(&curr_token)) {
         object = std::make_shared<NoneObject>(); // TODO should we return nullptr instead?
-    } else { // if it is brackets token []
-        throw SyntaxError("Read: invalid command line beginning (with brackets)\n");
+    } else { // if it is brackets or constant token
+        throw SyntaxError("Read: invalid command line beginning (with brackets or constant)\n");
     }
     return object;
 }
@@ -194,13 +175,13 @@ sptrObj ReadExpression(Tokenizer *tokenizer, bool *is_last_arg) {
                         std::shared_ptr<Object> cmd_obj = std::make_shared<CommandObject>();
                         As<CommandObject>(cmd_obj)->SetCommand(curr_object);
                         curr_object = cmd_obj;
-                        ReadCommandArgs(tokenizer, curr_object);
+                        ReadCommandArgs(tokenizer, cmd_obj);
                     }
                 }
             }
             objects.push_back(curr_object);
         } else if ((const_tptr = std::get_if<ConstantToken>(&curr_token))) {
-            objects.push_back(std::make_shared<Integer>(const_tptr->value_));
+            objects.push_back(std::make_shared<Rational>(const_tptr->value_));
             tokenizer->Next();
         } else if ((bracket_tptr = std::get_if<BracketToken>(&curr_token))) {
             if (*bracket_tptr == BracketToken::OPEN) {
@@ -271,10 +252,10 @@ std::shared_ptr<Object> ReadMatrix(Tokenizer *tokenizer) {
                 tokenizer->Next();
                 continue;
             } else {
-                throw SyntaxError("invalid mat init (in outer vectors)\n");
+                throw SyntaxError("ReadMatrix: invalid mat init (in outer vectors)\n");
             }
         } else {
-            throw SyntaxError("invalid mat init (in outer vectors)\n");
+            throw SyntaxError("ReadMatrix: invalid mat init (in outer vectors)\n");
         }
     }
     return std::make_shared<Matrix>(std::move(objects));
@@ -300,7 +281,7 @@ std::vector<std::shared_ptr<Object>> ReadLine(Tokenizer *tokenizer) {
         curr_token = tokenizer->GetToken();
         if (const BracketToken *bracket_token_ptr = std::get_if<BracketToken>(&curr_token)) {
             if (*bracket_token_ptr == BracketToken::OPEN) {
-                throw SyntaxError("invalid mat init (in inner vectors)\n"); // throw error mat A = [[1, []]]
+                throw SyntaxError("ReadLine: invalid mat init (in inner vectors)\n"); // throw error mat A = [[1, []]]
             } else {
                 tokenizer->Next();
                 break; // breaks when we are at the closing bracket of vector

@@ -37,6 +37,7 @@ set(SOURCE_FILES
         integer.cpp
         matrix.cpp
         main.cpp
+        rational.cpp
         )
 
 #include_directories(types)

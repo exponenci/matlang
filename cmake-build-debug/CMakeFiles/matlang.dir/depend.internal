@@ -9,6 +9,7 @@ CMakeFiles/matlang.dir/comm.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/integer.h
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.h
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
 CMakeFiles/matlang.dir/dispatcher.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/comm.h
  /mnt/c/Users/User/Desktop/kek/matlang/dispatcher.cpp
@@ -18,6 +19,7 @@ CMakeFiles/matlang.dir/dispatcher.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/integer.h
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.h
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
 CMakeFiles/matlang.dir/expression.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/error.h
  /mnt/c/Users/User/Desktop/kek/matlang/expression.cpp
@@ -25,6 +27,7 @@ CMakeFiles/matlang.dir/expression.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/integer.h
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.h
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
 CMakeFiles/matlang.dir/integer.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/error.h
  /mnt/c/Users/User/Desktop/kek/matlang/integer.cpp
@@ -41,6 +44,7 @@ CMakeFiles/matlang.dir/interpreter.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.h
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
  /mnt/c/Users/User/Desktop/kek/matlang/parser.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
  /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.h
 CMakeFiles/matlang.dir/main.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/comm.h
@@ -53,6 +57,7 @@ CMakeFiles/matlang.dir/main.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.h
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
  /mnt/c/Users/User/Desktop/kek/matlang/parser.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
  /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.h
 CMakeFiles/matlang.dir/matrix.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/error.h
@@ -60,6 +65,7 @@ CMakeFiles/matlang.dir/matrix.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.cpp
  /mnt/c/Users/User/Desktop/kek/matlang/matrix.h
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
 CMakeFiles/matlang.dir/parser.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/error.h
  /mnt/c/Users/User/Desktop/kek/matlang/expression.h
@@ -68,7 +74,14 @@ CMakeFiles/matlang.dir/parser.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/object.h
  /mnt/c/Users/User/Desktop/kek/matlang/parser.cpp
  /mnt/c/Users/User/Desktop/kek/matlang/parser.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
  /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.h
+CMakeFiles/matlang.dir/rational.cpp.o
+ /mnt/c/Users/User/Desktop/kek/matlang/error.h
+ /mnt/c/Users/User/Desktop/kek/matlang/integer.h
+ /mnt/c/Users/User/Desktop/kek/matlang/object.h
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.cpp
+ /mnt/c/Users/User/Desktop/kek/matlang/rational.h
 CMakeFiles/matlang.dir/tokenizer.cpp.o
  /mnt/c/Users/User/Desktop/kek/matlang/error.h
  /mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp

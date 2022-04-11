@@ -2,6 +2,11 @@
 
 // CONST_MATRIX_ITER
 
+ConstMatrixIter::ConstMatrixIter(const Matrix *ptr, size_t line, size_t colm)
+        : matrix_ptr_(ptr),
+          curr_l_(line),
+          curr_c_(colm) {}
+
 bool ConstMatrixIter::operator==(const ConstMatrixIter &other) const {
     return curr_l_ == other.curr_l_ && curr_c_ == other.curr_c_;
 }
@@ -28,7 +33,14 @@ ConstMatrixIter ConstMatrixIter::operator++(int) {
     return copy_of;
 }
 
-//MATRIX_ITER
+
+// MATRIX_ITER
+
+MatrixIter::MatrixIter(Matrix *ptr, size_t line, size_t colm)
+        : matrix_ptr_(ptr),
+          curr_l_(line),
+          curr_c_(colm) {}
+
 bool MatrixIter::operator==(const MatrixIter &other) const {
     return curr_l_ == other.curr_l_ && curr_c_ == other.curr_c_;
 }
@@ -61,6 +73,42 @@ MatrixIter MatrixIter::operator++(int) {
 
 
 // MATRIX
+void Matrix::ThrowIfNotValidMatrix() {
+    if (lines_ == 0 || columns_ == 0) {
+        throw SyntaxError("Matrix: invalid matrix given (zero lines/columns count)\n");
+    }
+    for (size_t i = 0; i < lines_; ++i) {
+        if (matrix_[i].size() != columns_) {
+            throw SyntaxError("Matrix: invalid matrix given (count of elements in lines are not equal)\n");
+        }
+    }
+}
+
+Matrix::Matrix(const std::vector<std::vector<sptrObj>> &table)
+        : Evaluable(object_type::MatrixT),
+          matrix_(table),
+          lines_(matrix_.size()) {
+    columns_ = !matrix_.empty() ? matrix_[0].size() : 0;
+    ThrowIfNotValidMatrix();
+}
+
+Matrix::Matrix(std::vector<std::vector<sptrObj>> &&value)
+        : Evaluable(object_type::MatrixT),
+          matrix_(std::move(value)),
+          lines_(matrix_.size()) {
+    columns_ = !matrix_.empty() ? matrix_[0].size() : 0;
+    ThrowIfNotValidMatrix();
+}
+
+Matrix::Matrix(size_t l, size_t c)
+        : Evaluable(object_type::MatrixT),
+          lines_(l),
+          columns_(c) {
+    matrix_.resize(l);
+    for (size_t i = 0; i < l; ++i) {
+        matrix_[i].resize(c);
+    }
+}
 
 [[nodiscard]] std::pair<size_t, size_t> Matrix::size() const {
     return {lines_, columns_};
@@ -110,7 +158,7 @@ void Matrix::operator*=(const Matrix &other) {
     for (size_t curr_l = 0; curr_l < lines_; ++curr_l) {
         new_data[curr_l].resize(other_columns);
         for (size_t curr_c = 0; curr_c < other_columns; ++curr_c) {
-            new_data[curr_l][curr_c] = std::make_shared<Integer>(0);
+            new_data[curr_l][curr_c] = std::make_shared<Rational>(0);
             for (size_t curr_ind = 0; curr_ind < columns_; ++curr_ind) {
                 new_data[curr_l][curr_c] = *As<Evaluable>(new_data[curr_l][curr_c]) + As<Evaluable>(
                         *As<Evaluable>(matrix_[curr_l][curr_ind]) * As<Evaluable>(other.matrix_[curr_ind][curr_c]));
@@ -143,17 +191,18 @@ std::shared_ptr<Evaluable> Matrix::operator*(const std::shared_ptr<Evaluable> &o
     Matrix multiply(*this);
     if (Is<Matrix>(other)) {
         multiply *= *As<Matrix>(other);
-    } else if (Is<Integer>(other)) {
-        multiply *= *As<Integer>(other);
+    } else if (Is<Rational>(other)) {
+        multiply *= *As<Rational>(other);
     } else {
         throw RuntimeError("Matrix::operator*: invalid operand type");
     }
     return std::make_shared<Matrix>(std::move(multiply));
 }
+
 std::shared_ptr<Evaluable> Matrix::operator/(const std::shared_ptr<Evaluable> &other) const {
     Matrix division(*this);
-    if (Is<Integer>(other)) {
-        division /= *As<Integer>(other);
+    if (Is<Rational>(other)) {
+        division /= *As<Rational>(other);
     } else {
         throw RuntimeError("Matrix::operator/: invalid operand type");
     }

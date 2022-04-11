@@ -1,14 +1,12 @@
 #pragma once
-#include <memory>
 
 #include "tokenizer.h"
 #include "object.h"
+#include "rational.h"
 #include "matrix.h"
 #include "expression.h"
-#include "integer.h"
 
-#ifndef MATLANG_PARSER_H
-#define MATLANG_PARSER_H
+#include <memory>
 
 
 std::list<std::shared_ptr<Object>> ReadScript(Tokenizer *);
@@ -24,5 +22,3 @@ std::shared_ptr<Object> ReadMatrix(Tokenizer *);
 std::vector<std::shared_ptr<Object>> ReadLine(Tokenizer *);
 
 bool ExpectRead(Tokenizer *, std::string_view);
-
-#endif //MATLANG_PARSER_H

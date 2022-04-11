@@ -1,14 +1,15 @@
 #pragma once
 
+#include "object.h"
+#include "rational.h"
+#include "error.h"
+
 #include <iostream>
 #include <vector>
 
-#include "object.h"
-#include "integer.h"
-#include "error.h"
+#ifndef MATLANG_MATRIX_H
+#define MATLANG_MATRIX_H
 
-//#ifndef MATLANG_MATRIX_H
-//#define MATLANG_MATRIX_H
 
 class Matrix;
 
@@ -19,10 +20,7 @@ private:
     size_t curr_l_, curr_c_;
 
 public:
-    explicit ConstMatrixIter(const Matrix *ptr, size_t line = 0, size_t colm = 0) :
-            matrix_ptr_(ptr),
-            curr_l_(line),
-            curr_c_(colm) {}
+    explicit ConstMatrixIter(const Matrix *, size_t = 0, size_t = 0);
 
     bool operator==(const ConstMatrixIter &other) const;
 
@@ -42,10 +40,7 @@ private:
     size_t curr_l_, curr_c_;
 
 public:
-    explicit MatrixIter(Matrix *ptr, size_t line = 0, size_t colm = 0) :
-            matrix_ptr_(ptr),
-            curr_l_(line),
-            curr_c_(colm) {}
+    explicit MatrixIter(Matrix *, size_t = 0, size_t = 0);
 
     bool operator==(const MatrixIter &other) const;
 
@@ -70,37 +65,14 @@ private:
     std::vector<std::vector<sptrObj>> matrix_ = {};
     size_t lines_{}, columns_{};
 
-    void ThrowIfNotValidMatrix() {
-        for (size_t i = 0; i < lines_; ++i) {
-            if (matrix_[i].size() != columns_) {
-                throw SyntaxError("Matrix: invalid matrix given (count of elements in lines are not equal)\n");
-            }
-        }
-    }
+    void ThrowIfNotValidMatrix();
 
 public:
-    explicit Matrix(const std::vector<std::vector<sptrObj>> &table = {})
-            : Evaluable(object_type::MatrixT),
-              matrix_(table),
-              lines_(matrix_.size()) {
-        columns_ = !matrix_.empty() ? matrix_[0].size() : 0;
-        ThrowIfNotValidMatrix();
-    }
+    explicit Matrix(const std::vector<std::vector<sptrObj>> & = {});
 
-    explicit Matrix(std::vector<std::vector<sptrObj>> &&value)
-            : Evaluable(object_type::MatrixT),
-              matrix_(std::move(value)),
-              lines_(matrix_.size()) {
-        columns_ = !matrix_.empty() ? matrix_[0].size() : 0;
-        ThrowIfNotValidMatrix();
-    }
+    explicit Matrix(std::vector<std::vector<sptrObj>> &&);
 
-    explicit Matrix(size_t l, size_t c) : Evaluable(object_type::MatrixT), lines_(l), columns_(c) {
-        matrix_.resize(l);
-        for (size_t i = 0; i < l; ++i) {
-            matrix_[i].resize(c);
-        }
-    }
+    explicit Matrix(size_t, size_t);
 
     [[nodiscard]] std::pair<size_t, size_t> size() const;
 
@@ -165,6 +137,4 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m);
 template<typename T, typename Ty>
 std::shared_ptr<Evaluable> operator*(const Ty &scalar, const Matrix &matrix);
 
-
-//#endif // MATLANG_MATRIX_H
-
+#endif // MATLANG_MATRIX_H

@@ -1,4 +1,9 @@
 #pragma once
+
+#include "matrix.h"
+#include "parser.h"
+#include "dispatcher.h"
+
 #include <functional>
 #include <iostream>
 #include <list>
@@ -6,13 +11,8 @@
 #include <sstream>
 #include <vector>
 
-#include "dispatcher.h"
-#include "matrix.h"
-#include "parser.h"
-
 #ifndef MATLANG_INTERPRETER_H
 #define MATLANG_INTERPRETER_H
-
 
 
 class Interpreter {

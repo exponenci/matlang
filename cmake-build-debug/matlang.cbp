@@ -129,6 +129,12 @@
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/parser.h">
 			<Option target="matlang"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/rational.cpp">
+			<Option target="matlang"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/rational.h">
+			<Option target="matlang"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp">
 			<Option target="matlang"/>
 		</Unit>

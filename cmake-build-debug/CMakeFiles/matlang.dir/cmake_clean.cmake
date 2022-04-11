@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/matlang.dir/main.cpp.o"
   "CMakeFiles/matlang.dir/matrix.cpp.o"
   "CMakeFiles/matlang.dir/parser.cpp.o"
+  "CMakeFiles/matlang.dir/rational.cpp.o"
   "CMakeFiles/matlang.dir/tokenizer.cpp.o"
   "matlang"
   "matlang.pdb"

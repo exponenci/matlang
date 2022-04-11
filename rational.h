@@ -1,50 +1,47 @@
 #pragma once
 
+#include "object.h"
+#include "integer.h"
+
 #ifndef MATLANG_RATIONAL_H
 #define MATLANG_RATIONAL_H
 
-#include <vector>
 
-int GCD(int a, int b);
+int64_t GCD(int64_t, int64_t);
 
-std::pair<int, int> Simplify(int a, int b);
+std::pair<int64_t, int64_t> Simplify(int64_t, int64_t);
 
-class Rational {
+class Rational : public Evaluable {
 private:
-    int numerator_, denominator_;
+    std::shared_ptr<Integer> numerator_, denominator_;
 
 public:
-    Rational() : numerator_(0), denominator_(1) {}
+    Rational();
 
-    Rational(int num) : numerator_(num), denominator_(1) {}
+    Rational(int64_t);
 
-    explicit Rational(int num, int denom) : numerator_(num), denominator_(denom) {
-        this->Update();
-    }
+    explicit Rational(int64_t, int64_t);
 
-    [[nodiscard]] int Numerator() const;
-    [[nodiscard]] int Denominator() const;
+    Rational(const std::shared_ptr<Evaluable>&);
 
-    friend Rational operator+(const Rational&, const Rational&);
-    friend Rational operator-(const Rational&, const Rational&);
-    friend Rational operator*(const Rational&, const Rational&);
-    friend Rational operator/(const Rational&, const Rational&);
+    std::shared_ptr<Evaluable> operator+(const std::shared_ptr<Evaluable> &) const override;
 
-    friend Rational& operator+=(Rational&, const Rational&);
-    friend Rational& operator-=(Rational&, const Rational&);
-    friend Rational& operator*=(Rational&, const Rational&);
-    friend Rational& operator/=(Rational&, const Rational&);
+    std::shared_ptr<Evaluable> operator-(const std::shared_ptr<Evaluable> &) const override;
 
-    Rational operator+() const;
-    Rational operator-() const;
+    std::shared_ptr<Evaluable> operator*(const std::shared_ptr<Evaluable> &) const override;
 
-    Rational& operator++();
-    Rational operator++(int);
-    Rational& operator--();
-    Rational operator--(int);
+    std::shared_ptr<Evaluable> operator/(const std::shared_ptr<Evaluable> &) const override;
 
-    bool operator==(const Rational& other) const;
-    bool operator!=(const Rational& other) const;
+    std::string GetString() override;
+
+    [[nodiscard]] int64_t Numerator() const;
+
+    [[nodiscard]] int64_t Denominator() const;
+
+    std::shared_ptr<Evaluable> operator+() const;
+
+    std::shared_ptr<Evaluable> operator-() const;
+
     void Update();
 };
 

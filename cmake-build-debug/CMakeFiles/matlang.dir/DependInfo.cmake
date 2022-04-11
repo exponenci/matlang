@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/Users/User/Desktop/kek/matlang/main.cpp" "/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/matlang.dir/main.cpp.o"
   "/mnt/c/Users/User/Desktop/kek/matlang/matrix.cpp" "/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/matlang.dir/matrix.cpp.o"
   "/mnt/c/Users/User/Desktop/kek/matlang/parser.cpp" "/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/matlang.dir/parser.cpp.o"
+  "/mnt/c/Users/User/Desktop/kek/matlang/rational.cpp" "/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/matlang.dir/rational.cpp.o"
   "/mnt/c/Users/User/Desktop/kek/matlang/tokenizer.cpp" "/mnt/c/Users/User/Desktop/kek/matlang/cmake-build-debug/CMakeFiles/matlang.dir/tokenizer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

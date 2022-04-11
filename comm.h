@@ -1,16 +1,15 @@
 #pragma once
 
 #include "object.h"
+#include "rational.h"
 #include "matrix.h"
-#include "integer.h"
 #include "expression.h"
-#include "comm.h"
 
-#include <stack>
+#include <functional>
 #include <map>
 #include <memory>
+#include <stack>
 #include <string>
-#include <functional>
 
 
 namespace cmd {
@@ -46,29 +45,22 @@ private:
     std::function<sptrObj(sptrObj, sptrObj)> func_;
 
 public:
-    ArithmeticCommand(std::function<sptrObj(sptrObj, sptrObj)> &&f)
-            : BaseCommand(cmd::cmd_type::Arithmetic),
-              func_(std::move(f)) {
-    }
+    ArithmeticCommand(std::function<sptrObj(sptrObj, sptrObj)> &&);
 
-    sptrObj Run(std::list<sptrObj> &args) override;
+    sptrObj Run(std::list<sptrObj> &) override;
 };
 
 
 class PrintCommand : public BaseCommand {
 public:
-    PrintCommand()
-            : BaseCommand(cmd::cmd_type::Print) {
-    }
+    PrintCommand();
 
-    sptrObj Run(std::list<sptrObj> &args) override;
+    sptrObj Run(std::list<sptrObj> &) override;
 };
 
 class TransposeCommand : public BaseCommand {
 public:
-    TransposeCommand()
-            : BaseCommand(cmd::cmd_type::Transpose) {
-    }
+    TransposeCommand();
 
-    sptrObj Run(std::list<sptrObj> &args) override;
+    sptrObj Run(std::list<sptrObj> &) override;
 };

@@ -16,17 +16,18 @@
 enum object_type {
     ObjectT,
     NoneT,
-    ExpressionT,
-    CommandT,
     SymbolT,
+    CommandT,
+    ExpressionT,
+    EvaluableT,
     IntegerT,
     MatrixT,
-    EvaluableT,
+    RationalT,
 };
 
 class Object : public std::enable_shared_from_this<Object> {
 private:
-    object_type type_;  // this object type
+    object_type type_;
 
 public:
     Object(object_type type = object_type::ObjectT) : type_(type) {
@@ -34,15 +35,7 @@ public:
 
     virtual ~Object() = default;
 
-    virtual std::string GetString() = 0; // ???
-
-    virtual void SetType(object_type type) { // ????
-        type_ = type;
-    }
-
-    virtual object_type GetType() const { // ????
-        return type_;
-    }
+    virtual std::string GetString() = 0;
 };
 
 typedef std::shared_ptr<Object> sptrObj;
@@ -57,6 +50,16 @@ bool Is(const sptrObj &obj) {
     return static_cast<bool>(dynamic_cast<T *>(obj.get()));
 }
 
+class NoneObject : public Object {
+public:
+    NoneObject() : Object(object_type::NoneT) {
+    }
+
+    std::string GetString() override {
+        return "<NONE>";
+    };
+};
+
 class Evaluable : public Object {
 public:
     explicit Evaluable(object_type type = object_type::EvaluableT) : Object(type) {}
@@ -68,16 +71,6 @@ public:
     virtual std::shared_ptr<Evaluable> operator*(const std::shared_ptr<Evaluable> &) const = 0;
 
     virtual std::shared_ptr<Evaluable> operator/(const std::shared_ptr<Evaluable> &) const = 0;
-};
-
-class NoneObject : public Object {
-public:
-    NoneObject() : Object(object_type::NoneT) {
-    }
-
-    std::string GetString() override {
-        return "<none object>";
-    };
 };
 
 class CommandObject : public Object {
@@ -131,6 +124,5 @@ public:
         return name_;
     };
 };
-
 
 #endif //MATLANG_OBJECT_H

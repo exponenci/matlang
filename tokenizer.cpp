@@ -1,18 +1,17 @@
 #include "tokenizer.h"
 #include "error.h"
 
-bool SymbolToken::operator==(const SymbolToken &other) const {
-    return name_ == other.name_;
+SymbolToken::SymbolToken(int char_code)
+        : name_(1, static_cast<char>(char_code)) {
 }
 
-bool ConstantToken::operator==(const ConstantToken &other) const {
-    return value_ == other.value_;
+SymbolToken::SymbolToken(const std::string &s)
+        : name_(s) {
 }
 
-bool SemicolonToken::operator==(const SemicolonToken &) const {
-    return true;
+ConstantToken::ConstantToken(int value)
+        : value_(value) {
 }
-
 
 Tokenizer::Tokenizer(std::istream *in) : in_(in) {
     Next();

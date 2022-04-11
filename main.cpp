@@ -36,11 +36,14 @@ int main() {
 //    }
     {
         Interpreter interpreter;
+        interpreter.Run("let a = 1/3; print(-a);");
+    }
+    {
+        Interpreter interpreter;
         interpreter.Run("print(1 * (2 + 3)); "            // 5
-                        "print( (((1 + 2) + 3) + 4) ); "    // 10
+                        "print( (((1 + 2) + 3) + 4) ); "  // 10
                         "print((1 + (2 * 3) + 4) * 5);"   // 55
                         );
-
         // f((g(a) + b) * (c + h(d)))
         // f(a * (b + c))
         // f((((a + b) + c) + d));
@@ -65,11 +68,11 @@ int main() {
         interpreter.Run("let A = [[1, 2], [2, 1], [1, 3]]; "
                         "let B = [[7, -1], [5, 0], [4, -3]]; "
                         "let C = [[2, 3], [1, 2]];"
-                        "print((C + (transpose(A) * B) + C) * 2); "
-                        "print(2 * C + transpose(A) * B - C * transpose(C)); "
+                        "print(A - B);"
                         "print(2 * A); "
                         "print(A * 2); "
-                        "print(A - B);"
+                        "print((C + (transpose(A) * B) + C) * 2); "
+                        "print(2 * C + transpose(A) * B - C * transpose(C)); "
                         );
     }
     return 0;

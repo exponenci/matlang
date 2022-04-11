@@ -2,16 +2,22 @@
 
 #include "object.h"
 
-//#ifndef MATLANG_INTEGER_H
-//#define MATLANG_INTEGER_H
+#ifndef MATLANG_INTEGER_H
+#define MATLANG_INTEGER_H
+
 
 class Integer : public Evaluable {
 private:
     int64_t value_;
 
 public:
-    Integer(int64_t value) : Evaluable(object_type::IntegerT), value_(value) {
-    }
+    Integer(int64_t);
+
+    Integer &operator=(int64_t);
+
+    int64_t GetValue() const;
+
+    void SetValue(int64_t);
 
     std::string GetString() override;
 
@@ -27,5 +33,4 @@ public:
 template<typename T>
 std::ostream &operator<<(std::ostream &out, const Integer &value);
 
-
-//#endif //MATLANG_INTEGER_H
+#endif //MATLANG_INTEGER_H
