@@ -110,6 +110,23 @@ public:
 
     void Transpose();
 
+    std::vector<std::vector<sptrObj>> DeepCopy() const {
+        std::vector<std::vector<sptrObj>> copy;
+        copy.resize(lines_);
+        std::shared_ptr<Rational> rat_ptr;
+        for (size_t i = 0; i < lines_; ++i) {
+            copy[i].reserve(columns_);
+            for (size_t j = 0; j < columns_; ++j) {
+                rat_ptr = As<Rational>(matrix_[i][j]);
+                copy[i].push_back(std::make_shared<Rational>(rat_ptr->Numerator(), rat_ptr->Denominator()));
+            }
+        }
+        return copy;
+    }
+    std::vector<sptrObj> &operator[](size_t i) {
+        return matrix_[i];
+    }
+
     std::vector<std::vector<sptrObj>> &GetArray();
 
     std::ostream &PrintOut(std::ostream &out) const;

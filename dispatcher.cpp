@@ -3,7 +3,7 @@
 
 Dispatcher::Dispatcher() {
     registers_ = {
-            {"+",         std::make_shared<ArithmeticCommand>(
+            {"+",           std::make_shared<ArithmeticCommand>(
                     [&](const sptrObj &lhs, const sptrObj &rhs) -> sptrObj {
                         if (Is<Matrix>(lhs)) {
                             return *As<Matrix>(lhs) + As<Evaluable>(rhs);
@@ -12,7 +12,7 @@ Dispatcher::Dispatcher() {
                         }
                         throw RuntimeError("Dispatcher: invalid operands for summation\n");
                     })},
-            {"-",         std::make_shared<ArithmeticCommand>(
+            {"-",           std::make_shared<ArithmeticCommand>(
                     [&](const sptrObj &lhs, const sptrObj &rhs) -> sptrObj {
                         if (Is<Matrix>(lhs) && Is<Matrix>(rhs)) {
                             return *As<Matrix>(lhs) - As<Evaluable>(rhs);
@@ -21,7 +21,7 @@ Dispatcher::Dispatcher() {
                         }
                         throw RuntimeError("Dispatcher: invalid operands for subtraction\n");
                     })},
-            {"*",         std::make_shared<ArithmeticCommand>(
+            {"*",           std::make_shared<ArithmeticCommand>(
                     [&](const sptrObj &lhs, const sptrObj &rhs) -> sptrObj {
                         if (Is<Rational>(lhs) && Is<Rational>(rhs)) {
                             return *As<Rational>(lhs) * As<Evaluable>(rhs);
@@ -32,7 +32,7 @@ Dispatcher::Dispatcher() {
                         }
                         throw RuntimeError("Dispatcher: invalid operands for multiply\n");
                     })},
-            {"/",         std::make_shared<ArithmeticCommand>(
+            {"/",           std::make_shared<ArithmeticCommand>(
                     [&](const sptrObj &lhs, const sptrObj &rhs) -> sptrObj {
                         if (Is<Rational>(lhs) && Is<Rational>(rhs)) {
                             return *As<Rational>(lhs) / As<Evaluable>(rhs);
@@ -41,8 +41,14 @@ Dispatcher::Dispatcher() {
                         }
                         throw RuntimeError("Dispatcher: invalid operands for division\n");
                     })},
-            {"print",     std::make_shared<PrintCommand>()},
-            {"transpose", std::make_shared<TransposeCommand>()}
+            {"print",       std::make_shared<PrintCommand>()},
+            {"transpose",   std::make_shared<TransposeCommand>()},
+            {"rref",        std::make_shared<LinearTransformationCommand>(cmd::rref)},
+            {"to_diag",     std::make_shared<LinearTransformationCommand>(cmd::to_diag)},
+            {"to_triangle", std::make_shared<LinearTransformationCommand>(cmd::to_triangle)},
+            {"inv",         std::make_shared<LinearTransformationCommand>(cmd::inv)},
+            {"det",         std::make_shared<LinearTransformationCommand>(cmd::det)},
+            {"rank",        std::make_shared<LinearTransformationCommand>(cmd::rank)},
     };
 }
 
