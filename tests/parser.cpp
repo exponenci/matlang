@@ -1,8 +1,8 @@
 #include <iostream>
 #include <sstream>
 
-#include "tokenizer.h"
-#include "parser.h"
+#include "include/tokenizer.h"
+#include "include/parser.h"
 
 
 void REQUIRE(bool cond, std::string_view sv = "") {

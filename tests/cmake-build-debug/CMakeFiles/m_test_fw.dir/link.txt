@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/m_test_fw.dir/parser.cpp.o  -o m_test_fw 

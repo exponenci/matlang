@@ -1,5 +1,7 @@
 #include "dispatcher.h"
 
+#include <utility>
+
 
 Dispatcher::Dispatcher() {
     registers_ = {
@@ -41,7 +43,6 @@ Dispatcher::Dispatcher() {
                         }
                         throw RuntimeError("Dispatcher: invalid operands for division\n");
                     })},
-            {"print",       std::make_shared<PrintCommand>()},
             {"transpose",   std::make_shared<TransposeCommand>()},
             {"rref",        std::make_shared<LinearTransformationCommand>(cmd::rref)},
             {"to_diag",     std::make_shared<LinearTransformationCommand>(cmd::to_diag)},
@@ -84,6 +85,9 @@ void Dispatcher::InitObject(const std::string &varname, std::shared_ptr<Object> 
     if (instance->registers_.contains(varname)) {
         throw NameError("Dispatcher: invalid name for object initializing (this string is reserved by language)\n");
     }
+    if (varname == "let" || varname == "init") {
+        throw NameError("Dispatcher: don't laugh at me =(\n");
+    }
     instance->variables_[varname] = std::move(sptr);
 }
 
@@ -118,6 +122,9 @@ std::shared_ptr<Object> Dispatcher::Invoke(const std::string &command, std::list
     return instance->registers_.at(command)->Run(args);
 }
 
+void Dispatcher::SetCommand(const std::string& name, std::shared_ptr<BaseCommand> command) {
+    instance->registers_[name] = std::move(command);
+}
 
 Dispatcher *Dispatcher::instance = nullptr;
 Deleter Dispatcher::deleter;

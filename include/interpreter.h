@@ -18,15 +18,19 @@
 class Interpreter {
 private:
     Dispatcher operation_holder_ = Dispatcher::Instance();
+    std::ostream& out_;
 
 public:
-    Interpreter() = default;
+    explicit Interpreter(std::ostream& out = std::cout) : out_(out) {
+        operation_holder_.SetCommand("print", std::make_shared<PrintCommand>(out_));
+    };
 
 private:
     std::shared_ptr<Object> Simplify(std::shared_ptr<Object> &);
 
 public:
     void Run(const std::string &);
+    void Run();
 };
 
 #endif //MATLANG_INTERPRETER_H

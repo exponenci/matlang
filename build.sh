@@ -1,7 +1,8 @@
 #!/bin/bash
+
 source_files=()
-for filename in ./*.cpp; do
-  source_files+=($filename)
+for filename in ./src/*.cpp ./types/src/*.cpp; do
+  source_files+=( "$filename" )
 done
 
-g++ -std=c++2a ${source_files[@]} -fconcepts -o run
+g++ -g -I ./include -I ./types/include -std=c++2a main.cpp "${source_files[@]}" -fconcepts -o matlang

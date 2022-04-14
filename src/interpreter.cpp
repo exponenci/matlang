@@ -17,6 +17,21 @@ void Interpreter::Run(const std::string &expression) {
     }
 }
 
+void Interpreter::Run() {
+    Tokenizer tokenizer{&std::cin};
+
+    std::string result;
+    result.reserve(100);
+
+    std::list<std::shared_ptr<Object>> parsed_script = ReadScript(&tokenizer);
+    if (!tokenizer.IsEnd()) {
+        throw SyntaxError("no whole line has been read;");
+    }
+    for (auto &line: parsed_script) {
+        line = Simplify(line); // make some evaluations, remove `ExpressionObject`s
+    }
+}
+
 std::shared_ptr<Object> Interpreter::Simplify(std::shared_ptr<Object> &object) {
     if (Is<CommandObject>(object)) {
         std::shared_ptr<Object> command_name = As<CommandObject>(object)->GetCommand();

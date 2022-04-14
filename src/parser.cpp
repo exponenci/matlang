@@ -105,7 +105,6 @@ sptrObj ReadCommandArgs(Tokenizer *tokenizer, sptrObj object) {
         const ConstantToken *constant_token_ptr = std::get_if<ConstantToken>(&curr_token);
         const BracketToken *bracket_token_ptr = std::get_if<BracketToken>(&curr_token);
         if (bracket_token_ptr && *bracket_token_ptr == BracketToken::CLOSE) {
-            // TODO is it real `throw error: print([[]]])` ??
             throw SyntaxError("ReadCommandArgs: invalid function argument (closing array branch was not expected)\n");
         } else if (symbol_token_ptr || constant_token_ptr || bracket_token_ptr) {
             bool is_last_arg; // if it will be true then we received last argument of func and should break loop
@@ -222,7 +221,6 @@ sptrObj ReadExpression(Tokenizer *tokenizer, bool *is_last_arg) {
 
 
 std::shared_ptr<Object> ReadMatrix(Tokenizer *tokenizer) {
-    // TODO rewrite ReadMatrix and ReadLine in one function after adding new class Vector
     // when get arg:
     // [[a, b, c]] _
     // ^

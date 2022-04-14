@@ -132,19 +132,21 @@ public:
     std::ostream &PrintOut(std::ostream &out) const;
 
     std::string GetString() override {
-        std::string result;
+        std::string result = "[";
         result.reserve((lines_ + 1) * (columns_ + 1));
         for (size_t curr_l = 0; curr_l < lines_; ++curr_l) {
             if (curr_l != 0) {
-                result += '\n';
+                result += "],\n ";
             }
+            result += "[";
             for (size_t curr_c = 0; curr_c < columns_; ++curr_c) {
                 if (curr_c != 0) {
-                    result += '\t';
+                    result += ",\t";
                 }
                 result += matrix_[curr_l][curr_c]->GetString();
             }
         }
+        result += "]]";
         return result;
     }
 };

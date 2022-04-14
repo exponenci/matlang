@@ -57,6 +57,8 @@ public:
     std::shared_ptr<Object> Eval(std::list<std::shared_ptr<Object>> &);
 
     std::shared_ptr<Object> Invoke(const std::string &, std::list<std::shared_ptr<Object>> &);
+
+    void SetCommand(const std::string&, std::shared_ptr<BaseCommand>);
 };
 
 
